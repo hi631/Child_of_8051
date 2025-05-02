@@ -278,11 +278,13 @@ void main(){
 		getstr(); cmd = cbuf[0]; cbp = &cbuf[1];
     	switch(cmd){
 		case 'T':
-			dtb = 1;
-			if(cbuf[1]!=0x0d) {
-				dtb = gets2h();
+			dtb = gets2h();
+			if(dtb==0) dtb = 1;
+			if(cbuf[1]!=0x0d || cbuf[1]=='T') {
 				puts("adr   bt a  b  dl dh r7 r6 r5 r4 r3 r2 r1 r0 sw\n");
 			}
+			if(cbuf[1]=='T') { madr = (int)&dbgad; dump1l(); }
+			else
 			for(ctb =0; ctb<dtb; ctb++){
 				putch(0x00); step_on(); init_uart(); putch(0x00);
 				madr = (int)&dbgad; dump1l();
