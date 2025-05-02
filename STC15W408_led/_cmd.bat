@@ -1,6 +1,6 @@
 @echo off
 PATH = C:\app\SDCC\bin;%PATH%
-set src=STC15W408_led
+set src=led
 @echo on
 sdcc %src%.c
 @echo off
